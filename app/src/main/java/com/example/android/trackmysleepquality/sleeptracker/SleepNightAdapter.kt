@@ -21,9 +21,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.trackmysleepquality.R
-import com.example.android.trackmysleepquality.convertDurationToFormatted
-import com.example.android.trackmysleepquality.convertNumericQualityToString
 import com.example.android.trackmysleepquality.database.SleepNight
 import com.example.android.trackmysleepquality.databinding.ListItemSleepNightBinding
 
@@ -52,18 +49,17 @@ class SleepNightAdapter: ListAdapter<SleepNight, SleepNightAdapter.ViewHolder>(S
              }
          }
     }
+}
 
-    class SleepNightDiffCallBack: DiffUtil.ItemCallback<SleepNight>() {
-        override fun areItemsTheSame(oldItem: SleepNight, newItem: SleepNight): Boolean {
-            //checks if two items have the same id
-            return oldItem.nightId == newItem.nightId
-        }
+class SleepNightDiffCallBack: DiffUtil.ItemCallback<SleepNight>() {
+    override fun areItemsTheSame(oldItem: SleepNight, newItem: SleepNight): Boolean {
+        //checks if two items have the same id
+        return oldItem.nightId == newItem.nightId
+    }
 
-        override fun areContentsTheSame(oldItem: SleepNight, newItem: SleepNight): Boolean {
-            //checks if two items are the same
-            return oldItem == newItem
-        }
-
+    override fun areContentsTheSame(oldItem: SleepNight, newItem: SleepNight): Boolean {
+        //checks if two items are the same
+        return oldItem == newItem
     }
 
 }
