@@ -66,21 +66,21 @@ class SleepTrackerViewModel(
      */
     val startButtonVisible = Transformations.map(tonight) {
         null == it
-    }
+    }!!
 
     /**
      * If tonight has been set, then the STOP button should be visible.
      */
     val stopButtonVisible = Transformations.map(tonight) {
         null != it
-    }
+    }!!
 
     /**
      * If there are any nights in the database, show the CLEAR button.
      */
     val clearButtonVisible = Transformations.map(nights) {
         it?.isNotEmpty()
-    }
+    }!!
 
     /**
      * Request a toast by setting this value to true.
@@ -234,5 +234,17 @@ class SleepTrackerViewModel(
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
+    }
+
+    private val _navigateToSleepDataQuality = MutableLiveData<Long>()
+    val navigateToSleepDataQuality
+        get() = _navigateToSleepDataQuality
+
+    fun onSleepNightClicked(id: Long){
+        _navigateToSleepDataQuality.value = id
+    }
+
+    fun onSleepDataQualityNavigated() {
+        _navigateToSleepDataQuality.value = null
     }
 }
